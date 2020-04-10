@@ -1,6 +1,9 @@
 import React from 'react'
 import logo from './logo.svg'
+import { Notification } from './Common/Notification/Notification'
 import './App.css'
+
+const emitAlert = () => Notification.alert('Howdy, stranger.')
 
 function App() {
     return (
@@ -18,6 +21,9 @@ function App() {
                 >
                     Learn React
                 </a>
+                <button data-testid="emit-alert" onClick={emitAlert}>
+                    Emit Alert
+                </button>
             </header>
         </div>
     )
