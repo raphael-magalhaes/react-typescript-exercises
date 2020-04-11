@@ -15,19 +15,10 @@ describe('App', () => {
         expect(linkElement).toBeInTheDocument()
     })
 
-    it('should have the emit alert button', () => {
+    it('should have the emit alert button that calls Notification.alert() with the expected message when clicked', () => {
         // Given
         const { getByTestId } = render(<App />)
-        const buttonElement = getByTestId('emit-alert')
-
-        // Then
-        expect(buttonElement).toBeInTheDocument()
-    })
-
-    it('emit alert button should call Notification.alert() with the expected message', () => {
-        // Given
-        const { getByTestId } = render(<App />)
-        const buttonElement = getByTestId('emit-alert')
+        const buttonElement = getByTestId('app__emit-alert')
 
         // When
         fireEvent.click(buttonElement)

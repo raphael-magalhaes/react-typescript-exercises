@@ -21,7 +21,7 @@ function App() {
                 >
                     Learn React
                 </a>
-                <button data-testid="emit-alert" onClick={emitAlert}>
+                <button data-testid="app__emit-alert" onClick={emitAlert}>
                     Emit Alert
                 </button>
             </header>
