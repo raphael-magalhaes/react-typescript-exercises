@@ -9,7 +9,8 @@ module.exports = {
         '!src/**/*@(.test).ts?(x)',
         '!src/**/*@(.style).ts',
         '!src/index.tsx',
-        '!src/serviceWorker.ts'
+        '!src/serviceWorker.ts',
+        '!src/setupTests.ts'
     ],
     mutator: 'typescript',
     testRunner: 'jest',
