@@ -1,36 +1,23 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
-import { Notification } from './Common/Notification'
+import { shallow } from 'enzyme'
 import App, { testables } from './App'
-
-jest.mock('./Components/DogDetails', () => {
-    return {
-        DogDetails: ({ onBark }: { onBark: () => {} }) => {
-            onBark()
-            return <div data-testid="app__dog-details"></div>
-        }
-    }
-})
+import { Notification } from './Common/Notification'
+import { DogDetails } from './Components/DogDetails'
 
 Notification.alert = jest.fn()
 
+beforeEach(() => {
+    jest.clearAllMocks()
+})
+
 describe('App', () => {
-    it('should have the learn react link', () => {
-        // Given
-        const { getByText } = render(<App />)
-        const linkElement = getByText(/learn react/i)
-
-        // Then
-        expect(linkElement).toBeInTheDocument()
-    })
-
     it('should have the emit alert button that calls Notification.alert() with the expected message when clicked', () => {
         // Given
-        const { getByTestId } = render(<App />)
-        const buttonElement = getByTestId('app__emit-alert')
+        const appWrapper = shallow(<App />)
+        const buttonWrapper = appWrapper.find('[data-testid="app__emit-alert"]')
 
         // When
-        fireEvent.click(buttonElement)
+        buttonWrapper.simulate('click')
 
         // Then
         expect(Notification.alert).toHaveBeenCalledWith('Howdy, stranger.')
@@ -46,25 +33,19 @@ describe('App', () => {
 
     it('should have <DogDetails/>', () => {
         // Given
-        const { getByTestId } = render(<App />)
-        const dogDetailsElement = getByTestId('app__dog-details')
+        const appWrapper = shallow(<App />)
+        const numberOfDogDetails = appWrapper.find(DogDetails).length
 
         // Then
-        expect(dogDetailsElement).toBeInTheDocument()
+        expect(numberOfDogDetails).toBe(1)
     })
 
-    // FIXME: The problem is that DogDetails.doBark (not exported) and
-    // testables.doBark (exported) are not the same reference. Please
-    // note that DogDetails is mocked to receive and call onBark prop
-    // before returning.
-    // If testing-library/react is not able to achieve a test like this
-    // then try using Enzyme (see https://enzymejs.github.io/enzyme/).
-    it.skip('should pass the doBark() to <DogDetails/> onBark prop', () => {
+    it('should pass the doBark() to <DogDetails/> onBark prop', () => {
         // Given
-        jest.spyOn(testables, 'doBark')
-        render(<App />)
+        const appWrapper = shallow(<App />)
+        const dogDetailsWrapper = appWrapper.find(DogDetails)
 
         // Then
-        expect(testables.doBark).toHaveBeenCalled()
+        expect(dogDetailsWrapper).toHaveProp('onBark', testables.doBark)
     })
 })

@@ -1,55 +1,64 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { shallow } from 'enzyme'
 import { DogDetails } from './DogDetails'
 import { Notification } from '../../Common/Notification'
 
 Notification.alert = jest.fn()
 
 describe('DogDetails', () => {
+    it('should render without crashing', () => {
+        shallow(<DogDetails title="title" imageURL="url" onBark={() => {}} />)
+    })
+
     it('should render title prop without changing it', () => {
         // Given
         const expectedTitle = 'Billy'
-        const { getByTestId } = renderValidDogDetailsWith({
+        const dogDetailsWrapper = renderDogDetailsWithProps({
             title: expectedTitle
         })
-        const titleElement = getByTestId('dog-details__title')
-        const renderedTitle = titleElement?.firstChild?.nodeValue
+        const titleWrapper = dogDetailsWrapper.find(
+            '[data-testid="dog-details__title"]'
+        )
 
         // Then
-        expect(renderedTitle).toBe(expectedTitle)
+        expect(titleWrapper).toHaveText(expectedTitle)
     })
 
     it('should pass imageURL prop to <img/> without changing it', () => {
         // Given
         const expectedImageURL = 'url'
-        const { getByTestId } = renderValidDogDetailsWith({
+        const dogDetailsWrapper = renderDogDetailsWithProps({
             imageURL: expectedImageURL
         })
-        const imageElement = getByTestId('dog-details__image')
-        const receivedImageURL = imageElement.getAttribute('src')
+        const imageWrapper = dogDetailsWrapper.find(
+            '[data-testid="dog-details__image"]'
+        )
+        const receivedImageURL = imageWrapper.prop('src')
 
         // Then
         expect(receivedImageURL).toBe(expectedImageURL)
     })
 
-    it('should have the bark button that calls onBark prop when clicked ', () => {
+    it('should have the bark button that calls onBark prop when clicked', () => {
         // Given
-        const onBark = jest.fn()
-        const { getByTestId } = renderValidDogDetailsWith({
-            onBark: onBark
+        const doBark = jest.fn()
+        const dogDetailsWrapper = renderDogDetailsWithProps({
+            onBark: doBark
         })
-        const buttonElement = getByTestId('dog-details__bark-button')
+        const buttonWrapper = dogDetailsWrapper.find(
+            '[data-testid="dog-details__bark-button"]'
+        )
 
         // When
-        fireEvent.click(buttonElement)
+        buttonWrapper.simulate('click')
 
         // Then
-        expect(onBark).toHaveBeenCalled()
+        expect(doBark).toHaveBeenCalled()
     })
 })
 
-const renderValidDogDetailsWith = ({
-    title = 'Dog Title',
+const renderDogDetailsWithProps = ({
+    title = 'title',
     imageURL = 'url',
     onBark = () => {}
-}) => render(<DogDetails title={title} imageURL={imageURL} onBark={onBark} />)
+}) => shallow(<DogDetails title={title} imageURL={imageURL} onBark={onBark} />)
