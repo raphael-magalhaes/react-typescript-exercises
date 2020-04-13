@@ -17,6 +17,9 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
+        "mutation": "yarn mutation:run && yarn mutation:open",
+        "mutation:run": "yarn stryker run",
+        "mutation:open": "http-server ./reports/mutation/html/ -c-1 -o ",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
@@ -42,6 +45,7 @@
         "@types/enzyme-adapter-react-16": "^1.0.6",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.2",
+        "http-server": "^0.12.1",
         "jest-enzyme": "^7.1.2",
         "prettier": "2.0.4",
         "react-test-renderer": "^16.13.1"
