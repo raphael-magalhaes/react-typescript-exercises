@@ -15,12 +15,12 @@ export const useClasses = createUseStyles({
         width: '100%',
         borderRadius: '50%'
     },
-    button: {
-        width: '7rem',
-        height: '3rem',
-        border: 0,
-        fontSize: '1.5rem',
-        backgroundColor: 'RoyalBlue',
-        color: '#ffffff'
+    actionButtonsContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '0.5rem'
+    },
+    scoldButton: {
+        width: '7.5rem'
     }
 })
