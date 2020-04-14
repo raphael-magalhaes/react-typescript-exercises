@@ -3,22 +3,22 @@ import { createUseStyles } from 'react-jss'
 export const useClasses = createUseStyles({
     container: {
         width: '15rem',
-        padding: '0 2rem 1rem',
+        padding: '0 2rem',
         backgroundColor: '#fafafa'
     },
     title: {
-        margin: '0.5rem',
+        margin: '0rem',
         fontSize: '4rem',
         color: '#424242'
     },
     image: {
         width: '100%',
+        height: '15rem',
         borderRadius: '50%'
     },
     actionButtonsContainer: {
         display: 'flex',
-        justifyContent: 'space-between',
-        padding: '0.5rem'
+        justifyContent: 'space-between'
     },
     scoldButton: {
         width: '7.5rem'

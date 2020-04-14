@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import { DogDetailsProps } from './DogDetails.type'
 import { useClasses } from './DogDetails.style'
+import { Spacer } from '../Spacer'
+
 export const DogDetails = ({
     testId,
     title,
@@ -15,14 +17,17 @@ export const DogDetails = ({
 
     return (
         <div className={styles.container} data-testid={testId}>
+            <Spacer height={0.5} />
             <h3 className={styles.title} data-testid="dog-details__title">
                 {title}
             </h3>
+            <Spacer height={0.5} />
             <img
                 className={styles.image}
                 data-testid="dog-details__image"
                 src={imageURL}
             />
+            <Spacer height={0.5} />
             <div className={styles.actionButtonsContainer}>
                 <Button
                     data-testid="dog-details__bark-button"
@@ -42,6 +47,7 @@ export const DogDetails = ({
                     {`${scoldCount}x Scold!`}
                 </Button>
             </div>
+            <Spacer />
         </div>
     )
 }
