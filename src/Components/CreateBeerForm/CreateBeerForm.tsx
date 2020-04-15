@@ -22,7 +22,12 @@ export const CreateBeerForm = () => {
                 Create Beer
             </h3>
             <Spacer height={1.5} />
-            <form className={styles.form} noValidate autoComplete="off">
+            <form
+                data-testid="create-beer-form__form"
+                className={styles.form}
+                noValidate
+                autoComplete="off"
+            >
                 <TextField
                     data-testid="create-beer-form__beer-name-input"
                     label="Beer Name"

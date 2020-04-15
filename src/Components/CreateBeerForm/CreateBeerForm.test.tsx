@@ -18,6 +18,17 @@ describe('CreateBeerForm', () => {
         expect(titleWrapper).toHaveProp('children', 'Create Beer')
     })
 
+    it('should render the form', () => {
+        // Given
+        const createBeerFormWrapper = mount(<CreateBeerForm />)
+        const formExists = createBeerFormWrapper.exists(
+            '[data-testid="create-beer-form__form"]'
+        )
+
+        // Then
+        expect(formExists).toBeTruthy()
+    })
+
     it('should render beer name input with the correct label', () => {
         // Given
         const createBeerFormWrapper = shallow(<CreateBeerForm />)
