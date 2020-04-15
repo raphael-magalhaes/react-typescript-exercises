@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import { DogDetailsProps } from './DogDetails.type'
 import { useClasses } from './DogDetails.style'
-import { Spacer } from '../Spacer'
+import { Spacer } from '../'
 
 export const DogDetails = ({
     testId,
@@ -25,6 +25,7 @@ export const DogDetails = ({
             <img
                 className={styles.image}
                 data-testid="dog-details__image"
+                alt="dog"
                 src={imageURL}
             />
             <Spacer height={0.5} />
