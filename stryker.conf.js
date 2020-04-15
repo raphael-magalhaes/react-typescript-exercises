@@ -14,6 +14,7 @@ module.exports = {
     ],
     mutator: 'typescript',
     testRunner: 'jest',
+    timeoutMS: 60000,
     reporters: ['progress', 'clear-text', 'html'],
     coverageAnalysis: 'off',
     jest: {
