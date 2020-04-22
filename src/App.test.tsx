@@ -6,6 +6,14 @@ import { DogDetails } from './Components/DogDetails'
 
 Notification.alert = jest.fn()
 
+const mockedTheme = {
+    breakpoints: { down: jest.fn(() => '') }
+}
+
+jest.mock('@material-ui/core/styles', () => ({
+    useTheme: () => mockedTheme
+}))
+
 beforeEach(() => {
     jest.clearAllMocks()
 })
@@ -47,5 +55,13 @@ describe('App', () => {
 
         // Then
         expect(dogDetailsWrapper).toHaveProp('onBark', testables.doBark)
+    })
+
+    it('should call theme.breakpoints.down with "md"', () => {
+        // Given
+        shallow(<App />)
+
+        // Then
+        expect(mockedTheme.breakpoints.down).toHaveBeenCalledWith('md')
     })
 })
