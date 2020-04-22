@@ -2,7 +2,12 @@ import React from 'react'
 import logo from './logo.svg'
 import { Notification } from './Common/Notification/Notification'
 import './App.css'
-import { CreateBeerForm, DogDetails, Spacer } from './Components'
+import {
+    CreateBeerForm,
+    CreateBeerFormikForm,
+    DogDetails,
+    Spacer
+} from './Components'
 
 const emitAlert = () => Notification.alert('Howdy, stranger.')
 const doBark = () => Notification.alert('Woof! Woof!')
@@ -24,6 +29,8 @@ function App() {
                 />
                 <Spacer />
                 <CreateBeerForm />
+                <Spacer />
+                <CreateBeerFormikForm />
                 <Spacer height={3} />
             </header>
         </div>
