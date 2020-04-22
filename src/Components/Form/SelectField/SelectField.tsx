@@ -10,6 +10,7 @@ import {
 import { SelectFieldProps } from './SelectField.type'
 import { useClasses } from './SelectField.style'
 
+// FIXME: Warning: findDOMNode is deprecated in StrictMode. See https://github.com/mui-org/material-ui/issues/13394.
 export const SelectField = ({
     name,
     label,
