@@ -1,7 +1,9 @@
 import { DogRepository } from './DogRepository'
 import { HTTP } from '../../infrastructure'
+import { Notification } from '../../Common/Notification'
 
 jest.mock('../../infrastructure')
+Notification.alert = jest.fn()
 
 const URL = {
     base: 'https://dog.ceo/api/',
@@ -36,5 +38,24 @@ describe('DogRepository', () => {
 
         // Then
         expect(received).toBe(expected)
+    })
+
+    it('should call Notification.alert with an error message containing the stringified error object', async () => {
+        // Given
+        const error = {
+            message: 'Network Error',
+            name: 'Error'
+        }
+        ;(HTTP.get as jest.Mock).mockRejectedValue(error)
+
+        // When
+        await DogRepository.getAllBreeds()
+
+        // Then
+        expect(Notification.alert).toHaveBeenCalledWith(
+            `The following error occured when trying to get all dog breeds: ${JSON.stringify(
+                error
+            )}`
+        )
     })
 })
