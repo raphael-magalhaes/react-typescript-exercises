@@ -2,7 +2,21 @@ import { DogRepository } from './DogRepository'
 import { HTTP } from '../../infrastructure'
 import { Notification } from '../../Common/Notification'
 
-jest.mock('../../infrastructure')
+const mockedResponse = {
+    data: {
+        message: {
+            dalmatian: [],
+            wolfhound: ['irish']
+        }
+    }
+}
+
+jest.mock('../../infrastructure', () => ({
+    HTTP: {
+        get: jest.fn(() => Promise.resolve(mockedResponse))
+    }
+}))
+
 Notification.alert = jest.fn()
 
 const URL = {
@@ -23,21 +37,11 @@ describe('DogRepository', () => {
     })
 
     it('should return the result of fetching all breeds without changing it', async () => {
-        // Given
-        const expected = {
-            message: {
-                dalmatian: [],
-                wolfhound: ['irish']
-            },
-            status: 'success'
-        }
-        ;(HTTP.get as jest.Mock).mockResolvedValue(expected)
-
         // When
         const received = await DogRepository.getAllBreeds()
 
         // Then
-        expect(received).toBe(expected)
+        expect(received).toStrictEqual(mockedResponse.data.message)
     })
 
     it('should call Notification.alert with an error message containing the stringified error object', async () => {

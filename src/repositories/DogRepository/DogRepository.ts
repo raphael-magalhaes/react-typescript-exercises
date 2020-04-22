@@ -8,7 +8,7 @@ const URL = {
 
 const getAllBreeds = async () =>
     await HTTP.get(`${URL.base}${URL.allBreeds}`)
-        .then((data) => data)
+        .then((response) => response?.data?.message)
         .catch((error) =>
             Notification.alert(
                 `The following error occured when trying to get all dog breeds: ${JSON.stringify(
