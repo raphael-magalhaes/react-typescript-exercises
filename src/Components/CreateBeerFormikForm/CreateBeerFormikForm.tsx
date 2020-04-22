@@ -3,6 +3,8 @@ import { Formik, Form } from 'formik'
 import { Button } from '@material-ui/core'
 import { Checkbox, TextField, SelectField, Spacer } from '../'
 import { Notification } from '../../Common/Notification'
+import { FormValues } from './CreateBeerFormikForm.type'
+import { validate } from './CreateBeerFormikForm.validation'
 import { useClasses } from './CreateBeerFormikForm.style'
 
 const beerTypes = [
@@ -11,7 +13,7 @@ const beerTypes = [
     { value: 'stout', text: 'Stout' }
 ]
 
-const initialValues = {
+const initialValues: FormValues = {
     beerName: '',
     beerType: '',
     hasCorn: false,
@@ -33,7 +35,11 @@ export const CreateBeerFormikForm = () => {
                 Create Beer
             </h3>
             <Spacer height={1.5} />
-            <Formik initialValues={initialValues} onSubmit={onSubmit}>
+            <Formik
+                initialValues={initialValues}
+                validate={validate}
+                onSubmit={onSubmit}
+            >
                 <Form className={styles.form}>
                     <TextField
                         name={'beerName'}

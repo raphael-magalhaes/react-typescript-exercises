@@ -2,10 +2,13 @@ import React from 'react'
 import { shallow, mount } from 'enzyme'
 import { Formik, Form } from 'formik'
 import { CreateBeerFormikForm, testables } from './CreateBeerFormikForm'
+import { FormValues } from './CreateBeerFormikForm.type'
+import { validate } from './CreateBeerFormikForm.validation'
 import { Notification } from '../../Common/Notification'
 import { SelectField } from '../'
 
 Notification.alert = jest.fn()
+const required = 'Required field'
 
 describe('CreateBeerFormikForm', () => {
     it('should render without crashing', () => {
@@ -36,6 +39,16 @@ describe('CreateBeerFormikForm', () => {
 
         // Then
         expect(initialValues).toStrictEqual(initialFormValues)
+    })
+
+    it('should pass the correct validate function to <Formik/>', () => {
+        // Given
+        const receivedValidate = mount(<CreateBeerFormikForm />)
+            .find(Formik)
+            .prop('validate')
+
+        // Then
+        expect(receivedValidate).toBe(validate)
     })
 
     it('should pass the correct onSubmit function to <Formik/>', () => {
@@ -127,5 +140,97 @@ describe('CreateBeerFormikForm', () => {
 
         // Then
         expect(text).toBe('Submit!')
+    })
+})
+
+describe('validate', () => {
+    it('should return an error message when the beer name is invalid', () => {
+        // Given
+        const values: FormValues = {
+            beerName: '',
+            beerType: '',
+            ingredients: ''
+        }
+
+        // When
+        const errors = validate(values)
+
+        // Then
+        expect(errors.beerName).toBe(required)
+    })
+
+    it('should not return an error message when the beer name is valid', () => {
+        // Given
+        const values: FormValues = {
+            beerName: 'Bear the Bear Beer',
+            beerType: '',
+            ingredients: ''
+        }
+
+        // When
+        const errors = validate(values)
+
+        // Then
+        expect(errors.beerName).toBe(undefined)
+    })
+
+    it('should return an error message when the beer type is invalid', () => {
+        // Given
+        const values: FormValues = {
+            beerName: '',
+            beerType: '',
+            ingredients: ''
+        }
+
+        // When
+        const errors = validate(values)
+        
+        // Then
+        expect(errors.beerType).toBe(required)
+    })
+
+    it('should not return an error message when the beer type is valid', () => {
+        // Given
+        const values: FormValues = {
+            beerName: '',
+            beerType: 'Ale',
+            ingredients: ''
+        }
+
+        // When
+        const errors = validate(values)
+
+        // Then
+        expect(errors.beerType).toBe(undefined)
+    })
+
+    it('should return an error message when the ingredients is invalid', () => {
+        // Given
+        const values: FormValues = {
+            beerName: '',
+            beerType: '',
+            ingredients: ''
+        }
+
+        // When
+        const errors = validate(values)
+
+        // Then
+        expect(errors.ingredients).toBe(required)
+    })
+
+    it('should not return an error message when the ingredients is valid', () => {
+        // Given
+        const values: FormValues = {
+            beerName: '',
+            beerType: '',
+            ingredients: 'Ale mixed with Mead'
+        }
+
+        // When
+        const errors = validate(values)
+
+        // Then
+        expect(errors.ingredients).toBe(undefined)
     })
 })
