@@ -1,5 +1,6 @@
 export { CreateBeerForm } from './CreateBeerForm'
 export { CreateBeerFormikForm } from './CreateBeerFormikForm'
 export { DogDetails } from './DogDetails'
+export { DogBreedList } from './DogBreedList/DogBreedList'
 export { Checkbox, TextField, SelectField } from './Form'
 export { Spacer } from './Spacer'
