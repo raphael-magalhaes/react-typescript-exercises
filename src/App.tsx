@@ -10,6 +10,7 @@ import {
 import { Notification } from './Common/Notification/Notification'
 import { useClasses } from './App.style'
 import './App.css'
+import { DogBreedListContainer } from './Containers'
 
 const emitAlert = () => Notification.alert('Howdy, stranger.')
 const doBark = () => Notification.alert('Woof! Woof!')
@@ -29,7 +30,10 @@ function App() {
                 </button>
                 <Spacer />
                 <Grid container spacing={3}>
-                    <Grid className={styles.dogDetails} item xs={12}>
+                    <Grid className={styles.left} item xs={12} md={12} lg={6}>
+                        <DogBreedListContainer />
+                    </Grid>
+                    <Grid className={styles.right} item xs={12} md={12} lg={6}>
                         <DogDetails
                             testId="app__dog-details"
                             title="Dog"
@@ -37,22 +41,10 @@ function App() {
                             onBark={doBark}
                         />
                     </Grid>
-                    <Grid
-                        className={styles.createBeerForm}
-                        item
-                        xs={12}
-                        md={12}
-                        lg={6}
-                    >
+                    <Grid className={styles.left} item xs={12} md={12} lg={6}>
                         <CreateBeerForm />
                     </Grid>
-                    <Grid
-                        className={styles.createBeerFormikForm}
-                        item
-                        xs={12}
-                        md={12}
-                        lg={6}
-                    >
+                    <Grid className={styles.right} item xs={12} md={12} lg={6}>
                         <CreateBeerFormikForm />
                     </Grid>
                 </Grid>

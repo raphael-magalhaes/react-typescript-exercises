@@ -5,11 +5,11 @@ export const useClasses = createUseStyles({
         display: 'flex',
         justifyContent: 'center'
     },
-    createBeerForm: (isMdOrLower: boolean) => ({
+    left: (isMdOrLower: boolean) => ({
         display: 'flex',
         justifyContent: isMdOrLower ? 'center' : 'flex-end'
     }),
-    createBeerFormikForm: (isMdOrLower: boolean) => ({
+    right: (isMdOrLower: boolean) => ({
         display: 'flex',
         justifyContent: isMdOrLower ? 'center' : 'flex-start'
     })
