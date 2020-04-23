@@ -1,12 +1,13 @@
 import { HTTP } from '../../infrastructure'
 import { Notification } from '../../Common/Notification'
+import { GetAllBreedsResponse } from './DogRepository.type'
 
 const URL = {
     base: 'https://dog.ceo/api/',
     allBreeds: 'breeds/list/all'
 }
 
-const getAllBreeds = async () =>
+const getAllBreeds = async (): Promise<GetAllBreedsResponse> =>
     await HTTP.get(`${URL.base}${URL.allBreeds}`)
         .then((response) => response?.data?.message)
         .catch((error) =>
