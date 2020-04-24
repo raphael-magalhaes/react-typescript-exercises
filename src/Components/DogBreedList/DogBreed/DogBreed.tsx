@@ -1,16 +1,11 @@
 import React from 'react'
-import { Spacer } from '../../Spacer'
+import { ListItem, ListItemText } from '@material-ui/core'
 import { DogBreedProps } from './DogBreed.type'
-import { useClasses } from './DogBreed.style'
 
-export const DogBreed = ({ name }: DogBreedProps) => {
-    const styles = useClasses()
-
+export const DogBreed = ({ name, style, index }: DogBreedProps) => {
     return (
-        <div className={styles.container}>
-            <Spacer />
-            <h4 className={styles.name}>{name}</h4>
-            <Spacer />
-        </div>
+        <ListItem button style={style} key={index}>
+            <ListItemText primary={name} />
+        </ListItem>
     )
 }

@@ -1,19 +1,27 @@
-import React, { Fragment } from 'react'
-import { Divider } from '@material-ui/core'
+import React from 'react'
+import { FixedSizeList, ListChildComponentProps } from 'react-window'
 import { DogBreed } from './DogBreed/DogBreed'
-import { DogBreedListProps, Breed } from './DogBreedList.type'
+import { DogBreedListProps } from './DogBreedList.type'
 import { useClasses } from './DogBreedList.style'
 
 export const DogBreedList = ({ breeds }: DogBreedListProps) => {
     const styles = useClasses()
 
-    return <div className={styles.container}>{createBreedList(breeds)}</div>
+    return (
+        <div className={styles.container}>
+            <FixedSizeList
+                itemData={breeds}
+                height={400}
+                width={304}
+                itemSize={46}
+                itemCount={breeds.length}
+            >
+                {renderRow}
+            </FixedSizeList>
+        </div>
+    )
 }
 
-const createBreedList = (breeds: Breed[]) =>
-    breeds.map((breed) => (
-        <Fragment key={breed}>
-            <DogBreed name={breed} />
-            <Divider />
-        </Fragment>
-    ))
+const renderRow = ({ data, style, index }: ListChildComponentProps) => {
+    return <DogBreed name={data[index]} style={style} index={index} />
+}
