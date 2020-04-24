@@ -29,25 +29,51 @@ function App() {
                     Emit Alert
                 </button>
                 <Spacer />
-                <Grid container spacing={3}>
-                    <Grid className={styles.left} item xs={12} md={12} lg={6}>
-                        <DogBreedListContainer />
+                <div className={styles.gridContainer}>
+                    <Grid container spacing={3}>
+                        <Grid
+                            className={styles.left}
+                            item
+                            xs={12}
+                            md={12}
+                            lg={6}
+                        >
+                            <DogBreedListContainer />
+                        </Grid>
+                        <Grid
+                            className={styles.right}
+                            item
+                            xs={12}
+                            md={12}
+                            lg={6}
+                        >
+                            <DogDetails
+                                testId="app__dog-details"
+                                title="Dog"
+                                imageURL="https://via.placeholder.com/200x200?text=Dog%20Image"
+                                onBark={doBark}
+                            />
+                        </Grid>
+                        <Grid
+                            className={styles.left}
+                            item
+                            xs={12}
+                            md={12}
+                            lg={6}
+                        >
+                            <CreateBeerForm />
+                        </Grid>
+                        <Grid
+                            className={styles.right}
+                            item
+                            xs={12}
+                            md={12}
+                            lg={6}
+                        >
+                            <CreateBeerFormikForm />
+                        </Grid>
                     </Grid>
-                    <Grid className={styles.right} item xs={12} md={12} lg={6}>
-                        <DogDetails
-                            testId="app__dog-details"
-                            title="Dog"
-                            imageURL="https://via.placeholder.com/200x200?text=Dog%20Image"
-                            onBark={doBark}
-                        />
-                    </Grid>
-                    <Grid className={styles.left} item xs={12} md={12} lg={6}>
-                        <CreateBeerForm />
-                    </Grid>
-                    <Grid className={styles.right} item xs={12} md={12} lg={6}>
-                        <CreateBeerFormikForm />
-                    </Grid>
-                </Grid>
+                </div>
                 <Spacer height={3} />
             </header>
         </div>

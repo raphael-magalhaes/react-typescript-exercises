@@ -1,9 +1,9 @@
 import { createUseStyles } from 'react-jss'
 
 export const useClasses = createUseStyles({
-    dogDetails: {
-        display: 'flex',
-        justifyContent: 'center'
+    gridContainer: {
+        // Overflow hidden reasoning: https://github.com/mui-org/material-ui/issues/7466
+        overflow: 'hidden'
     },
     left: (isMdOrLower: boolean) => ({
         display: 'flex',
